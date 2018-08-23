@@ -1,3 +1,12 @@
+"""
+# title:full_author_detail.py .
+
+# description: a webcrawler for retrieve quote author details
+# author: Tome Lourenco
+# date: 22 August 2018
+# version: 1.0
+# ==============================================================================
+"""
 # -*- coding: utf-8 -*-
 import scrapy
 
@@ -7,6 +16,8 @@ class FullAuthorDetailSpider(scrapy.Spider):
 
     Created to crawl a specific url in multiple
     Pages following detail links in each iteration.
+    :param scrapy.Spider:
+    :returns: dict with requested details, name and bday
     """
 
     name = 'full_author_detail'
@@ -17,8 +28,8 @@ class FullAuthorDetailSpider(scrapy.Spider):
         """Parse the response from the requested start_urls.
 
         A parser.
-        param: response, from the requested start_urls
-        returns a dict containing the keys as results from css keys
+        :param response: from the requested start_urls
+        :returns: a dict containing the keys as results from css keys
         """
         urls = response.css('div.quote > span > a::attr(href)').extract()
         for url in urls:
@@ -36,8 +47,8 @@ class FullAuthorDetailSpider(scrapy.Spider):
         """Parse the response from the requested start_urls.
 
         A parser for details.
-        param: response, from the requested start_urls
-        returns a dict containing the keys as results from css keys
+        :param response: from the requested start_urls
+        :returns: a dict containing the keys as results from css keys
         """
         yield {
             'name': response.css('h3.author-title::text').extract_first(),

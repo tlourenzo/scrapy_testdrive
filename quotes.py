@@ -1,3 +1,12 @@
+"""
+# title:quotes.py .
+
+# description: a webcrawler for retrieve quotes and its details from a website
+# author: Tome Lourenco
+# date: 22 August 2018
+# version: 1.0
+# ==============================================================================
+"""
 # -*- coding: utf-8 -*-
 import scrapy
 
@@ -13,8 +22,8 @@ class QuotesSpider(scrapy.Spider):  # Name quotes.py
         """Parse the response from the requested start_urls.
 
         A parser.
-        param: response, from the requested start_urls
-        returns a dict containing the keys as results from css keys
+        :param response: from the requested start_urls
+        :returns: a dict containing the keys as results from css keys
         """
         self.log("Visited: " + response.url)
         for quote in response.css('div.quote'):
