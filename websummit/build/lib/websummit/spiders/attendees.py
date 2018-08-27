@@ -3,9 +3,8 @@ import scrapy
 import json
 from time import sleep
 
-
 class AttendeesSpider(scrapy.Spider):
-    """Class AttendeesSpider.
+    """Class AttendeesSpider
 
     Created to crawl a websummit API in multiple pages mode.
     :param scrapy.Spider:
@@ -13,9 +12,8 @@ class AttendeesSpider(scrapy.Spider):
     """
 
     name = 'websummit_at'
-    allowed_domains = []
-    api_url = ('https://api.cilabs.com/conferences/ws17/lists/'
-               'featured_attendees?interleave=true&&page={}')
+    allowed_domains = ['websummit.com']
+    api_url = 'https://api.cilabs.com/conferences/ws17/lists/featured_attendees?interleave=true&&page={}'
     page = 1
     start_urls = [api_url.format(page)]
 
@@ -42,7 +40,6 @@ class AttendeesSpider(scrapy.Spider):
             self.page += 1
             url = self.api_url.format(self.page)
             sleep(10)
-            yield scrapy.Request(url=url, callback=self.parse, dont_filter=True)
+            yield scrapy.Request(url=url, callback=self.parse)
         else:
             print('ERROR!!!!! 404')
-            yield scrapy.Request(url=url, callback=self.parse, dont_filter=True)
